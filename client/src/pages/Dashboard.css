@@ -148,11 +148,10 @@
 }
 
 .budget-category-row {
-    display: grid;
-    grid-template-columns: 180px 1fr 220px;
-    gap: var(--space-md);
-    align-items: center;
-    padding: var(--space-sm) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
     border-bottom: 1px solid var(--border-light);
 }
 
@@ -160,10 +159,24 @@
     border-bottom: none;
 }
 
+.category-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .category-info {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+}
+
+.category-remaining-large {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    /* Ensure it stands out as requested */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .category-color-dot {
@@ -174,67 +187,58 @@
 }
 
 .category-name {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
     color: var(--text-primary);
 }
 
-.category-progress {
-    min-width: 120px;
+.category-progress-wrapper {
+    width: 100%;
 }
 
-.category-stats {
+.category-row-footer {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    font-size: var(--font-size-sm);
-    justify-content: center;
-}
-
-.stats-main {
-    display: flex;
+    justify-content: space-between;
     align-items: center;
+    font-size: var(--font-size-sm);
+}
+
+.category-details-text {
+    display: flex;
     gap: var(--space-xs);
+    align-items: center;
 }
 
-.stats-remaining {
-    font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
-    font-weight: var(--font-weight-medium);
-}
-
-.category-stats .spent {
+.category-details-text .spent {
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
 }
 
-.category-stats .separator {
+.category-details-text .separator {
     color: var(--text-tertiary);
 }
 
-.category-stats .allocated {
+.category-details-text .allocated {
     color: var(--text-secondary);
 }
 
-.category-stats .percentage {
+.category-row-footer .percentage {
     font-weight: var(--font-weight-bold);
     padding: 2px 8px;
     border-radius: var(--radius-sm);
-    margin-left: var(--space-sm);
 }
 
-.category-stats .percentage.safe {
+.category-row-footer .percentage.safe {
     background: rgba(16, 185, 129, 0.1);
     color: var(--color-success);
 }
 
-.category-stats .percentage.warning {
+.category-row-footer .percentage.warning {
     background: rgba(245, 158, 11, 0.1);
     color: var(--color-warning);
 }
 
-.category-stats .percentage.danger {
+.category-row-footer .percentage.danger {
     background: rgba(239, 68, 68, 0.1);
     color: var(--color-danger);
 }

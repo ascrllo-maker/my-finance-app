@@ -200,33 +200,37 @@ const Dashboard = () => {
                                     const percentage = calculatePercentage(cat.spent, cat.allocatedAmount);
                                     return (
                                         <div key={index} className="budget-category-row">
-                                            <div className="category-info">
-                                                <div
-                                                    className="category-color-dot"
-                                                    style={{ backgroundColor: pieChartData.datasets[0].backgroundColor[index] }}
-                                                />
-                                                <span className="category-name">{cat.name}</span>
+                                            <div className="category-row-header">
+                                                <div className="category-info">
+                                                    <div
+                                                        className="category-color-dot"
+                                                        style={{ backgroundColor: pieChartData.datasets[0].backgroundColor[index] }}
+                                                    />
+                                                    <span className="category-name">{cat.name}</span>
+                                                </div>
+                                                <div className="category-remaining-large">
+                                                    Remaining: {formatCurrency(Math.max(0, cat.allocatedAmount - cat.spent))}
+                                                </div>
                                             </div>
-                                            <div className="category-progress">
+
+                                            <div className="category-progress-wrapper">
                                                 <ProgressBar
                                                     value={cat.spent}
                                                     max={cat.allocatedAmount}
                                                     color={status.color}
                                                     showLabel={false}
                                                     showPercentage={false}
-                                                    size="sm"
+                                                    size="md"
                                                 />
                                             </div>
-                                            <div className="category-stats">
-                                                <div className="stats-main">
+
+                                            <div className="category-row-footer">
+                                                <div className="category-details-text">
                                                     <span className="spent">{formatCurrency(cat.spent)}</span>
                                                     <span className="separator">/</span>
                                                     <span className="allocated">{formatCurrency(cat.allocatedAmount)}</span>
-                                                    <span className={`percentage ${status.status}`}>{percentage.toFixed(0)}%</span>
                                                 </div>
-                                                <div className="stats-remaining">
-                                                    Remaining: {formatCurrency(Math.max(0, cat.allocatedAmount - cat.spent))}
-                                                </div>
+                                                <span className={`percentage ${status.status}`}>{percentage.toFixed(0)}%</span>
                                             </div>
                                         </div>
                                     );
