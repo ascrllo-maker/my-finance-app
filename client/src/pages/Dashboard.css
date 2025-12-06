@@ -149,7 +149,7 @@
 
 .budget-category-row {
     display: grid;
-    grid-template-columns: 180px 1fr 200px;
+    grid-template-columns: 180px 1fr 220px;
     gap: var(--space-md);
     align-items: center;
     padding: var(--space-sm) 0;
@@ -185,10 +185,23 @@
 
 .category-stats {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: var(--font-size-sm);
+    justify-content: center;
+}
+
+.stats-main {
+    display: flex;
     align-items: center;
     gap: var(--space-xs);
-    font-size: var(--font-size-sm);
-    justify-content: flex-end;
+}
+
+.stats-remaining {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    font-weight: var(--font-weight-medium);
 }
 
 .category-stats .spent {

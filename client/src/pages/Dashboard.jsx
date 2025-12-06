@@ -218,10 +218,15 @@ const Dashboard = () => {
                                                 />
                                             </div>
                                             <div className="category-stats">
-                                                <span className="spent">{formatCurrency(cat.spent)}</span>
-                                                <span className="separator">/</span>
-                                                <span className="allocated">{formatCurrency(cat.allocatedAmount)}</span>
-                                                <span className={`percentage ${status.status}`}>{percentage.toFixed(0)}%</span>
+                                                <div className="stats-main">
+                                                    <span className="spent">{formatCurrency(cat.spent)}</span>
+                                                    <span className="separator">/</span>
+                                                    <span className="allocated">{formatCurrency(cat.allocatedAmount)}</span>
+                                                    <span className={`percentage ${status.status}`}>{percentage.toFixed(0)}%</span>
+                                                </div>
+                                                <div className="stats-remaining">
+                                                    Remaining: {formatCurrency(Math.max(0, cat.allocatedAmount - cat.spent))}
+                                                </div>
                                             </div>
                                         </div>
                                     );
