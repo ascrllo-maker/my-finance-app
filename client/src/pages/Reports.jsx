@@ -111,31 +111,25 @@ const Reports = () => {
             }
         }
     };
-
     const pieOptions = {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: {
-                top: 10,
-                bottom: 10,
-                left: 0,
-                right: 0
-            }
+            padding: 0
         },
         plugins: {
             legend: {
                 position: 'right',
-                align: 'center', // Vertically center the legend
+                align: 'center',
                 labels: {
                     padding: 20,
                     font: {
                         size: 14,
                         weight: 'bold'
                     },
-                    usePointStyle: false, // Use default rectangles
-                    boxWidth: 40, // Wide rectangles as shown in image
-                    boxHeight: 12 // Slight height for the rectangle
+                    usePointStyle: false,
+                    boxWidth: 40,
+                    boxHeight: 12
                 }
             },
             tooltip: {
