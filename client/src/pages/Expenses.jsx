@@ -18,7 +18,8 @@ const Expenses = () => {
     const [showModal, setShowModal] = useState(false);
     const [editingExpense, setEditingExpense] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterCategory, setFilterCategory] = useState('');
+    const [selectedMonth, setSelectedMonth] = useState(''); // Empty for all months
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
     // Form state
     const [formData, setFormData] = useState({
@@ -33,21 +34,44 @@ const Expenses = () => {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [selectedMonth, selectedYear]);
 
     const loadData = async () => {
         try {
+            setLoading(true); // Ensure loading state is true when refetching
+
+            // Calculate date range based on filters
+            const filters = { limit: 100 };
+
+            if (selectedYear) {
+                if (selectedMonth) {
+                    // Specific month in a year
+                    const startDate = new Date(selectedYear, selectedMonth - 1, 1);
+                    const endDate = new Date(selectedYear, selectedMonth, 0, 23, 59, 59);
+                    filters.startDate = startDate.toISOString();
+                    filters.endDate = endDate.toISOString();
+                } else {
+                    // Entire year
+                    const startDate = new Date(selectedYear, 0, 1);
+                    const endDate = new Date(selectedYear, 11, 31, 23, 59, 59);
+                    filters.startDate = startDate.toISOString();
+                    filters.endDate = endDate.toISOString();
+                }
+            }
+
             const [expensesData, categoriesData, budgetData] = await Promise.all([
-                expenseService.getAll({ limit: 100 }),
+                expenseService.getAll(filters),
                 categoryService.getAll('expense'),
                 budgetService.getCurrent()
             ]);
 
             setExpenses(expensesData.expenses || []);
-            setCategories(categoriesData || []);
-            setBudgetCategories(budgetData?.categories || []);
+            // Only set categories if not already loaded (optimization)
+            if (categories.length === 0) setCategories(categoriesData || []);
+            if (budgetCategories.length === 0) setBudgetCategories(budgetData?.categories || []);
         } catch (err) {
             console.error('Failed to load data:', err);
+            error('Failed to refresh expenses');
         } finally {
             setLoading(false);
         }
@@ -65,6 +89,8 @@ const Expenses = () => {
         });
         setEditingExpense(null);
     };
+
+    // ... (modal handlers remain the same until we hit render)
 
     const openAddModal = () => {
         resetForm();
@@ -136,6 +162,18 @@ const Expenses = () => {
 
     const totalFiltered = filteredExpenses.reduce((sum, exp) => sum + exp.amount, 0);
 
+    // Helpers for dropdowns
+    const months = [
+        { value: '', label: 'All Months' },
+        ...Array.from({ length: 12 }, (_, i) => ({
+            value: i + 1,
+            label: new Date(0, i).toLocaleString('default', { month: 'long' })
+        }))
+    ];
+
+    const currentYear = new Date().getFullYear();
+    const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+
     if (loading) {
         return (
             <div className="expenses-loading">
@@ -170,6 +208,28 @@ const Expenses = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
+
+                    {/* Date Filters */}
+                    <select
+                        className="filter-select"
+                        value={selectedMonth}
+                        onChange={(e) => setSelectedMonth(e.target.value ? parseInt(e.target.value) : '')}
+                    >
+                        {months.map(m => (
+                            <option key={m.label} value={m.value}>{m.label}</option>
+                        ))}
+                    </select>
+
+                    <select
+                        className="filter-select"
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+                    >
+                        {years.map(y => (
+                            <option key={y} value={y}>{y}</option>
+                        ))}
+                    </select>
+
                     <select
                         className="filter-select"
                         value={filterCategory}
