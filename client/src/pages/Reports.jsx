@@ -115,7 +115,7 @@ const Reports = () => {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: 20
+            padding: 0
         },
         plugins: {
             legend: {
