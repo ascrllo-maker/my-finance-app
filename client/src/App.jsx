@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { NotificationProvider } from './contexts/NotificationContext';
@@ -72,9 +73,12 @@ function AppRoutes() {
       } />
 
       {/* Protected routes */}
+      {/* Protected routes */}
       <Route path="/" element={
         <ProtectedRoute>
-          <AppLayout />
+          <ErrorBoundary>
+            <AppLayout />
+          </ErrorBoundary>
         </ProtectedRoute>
       }>
         <Route index element={<Dashboard />} />
