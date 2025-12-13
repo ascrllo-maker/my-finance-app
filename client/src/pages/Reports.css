@@ -116,7 +116,8 @@
 }
 
 .chart-container.pie-chart {
-    height: 400px;
+    height: 500px;
+    width: 100%;
 }
 
 .chart-card.full-width {

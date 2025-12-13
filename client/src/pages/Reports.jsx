@@ -115,9 +115,32 @@ const Reports = () => {
     const pieOptions = {
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+            padding: 20
+        },
         plugins: {
             legend: {
-                position: 'right'
+                position: 'right',
+                labels: {
+                    padding: 20,
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    usePointStyle: true,
+                    pointStyle: 'circle'
+                }
+            },
+            tooltip: {
+                titleFont: {
+                    size: 16
+                },
+                bodyFont: {
+                    size: 14
+                },
+                padding: 12,
+                cornerRadius: 8,
+                displayColors: true
             }
         }
     };
