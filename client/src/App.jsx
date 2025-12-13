@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -92,7 +93,22 @@ function AppRoutes() {
   );
 }
 
+// Force cache clear for version 1.1
+const APP_VERSION = '1.1';
+
 function App() {
+  React.useEffect(() => {
+    const currentVersion = localStorage.getItem('app_version');
+    if (currentVersion !== APP_VERSION) {
+      console.log('New version detected. Clearing cache...');
+      localStorage.clear();
+      sessionStorage.clear();
+      localStorage.setItem('app_version', APP_VERSION);
+      // Force reload to ensure clean state
+      window.location.reload();
+    }
+  }, []);
+
   return (
     <ThemeProvider>
       <NotificationProvider>
