@@ -115,9 +115,52 @@
     justify-content: center;
 }
 
-.chart-container.pie-chart {
-    height: 500px;
-    width: 100%;
+.chart-container.pie-layout-container {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+}
+
+.pie-chart-wrapper {
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+    /* Prevent flex overflow */
+    display: flex;
+    justify-content: flex-end;
+    /* Push chart towards legend */
+    padding-right: var(--space-md);
+}
+
+.custom-legend {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-md);
+    min-width: 150px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.legend-color-box {
+    width: 40px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.legend-text {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    /* Bold text as requested */
+    color: var(--text-primary);
+    white-space: nowrap;
 }
 
 .chart-card.full-width {

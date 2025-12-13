@@ -115,22 +115,11 @@ const Reports = () => {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: 0
+            padding: 20
         },
         plugins: {
             legend: {
-                position: 'right',
-                align: 'center',
-                labels: {
-                    padding: 20,
-                    font: {
-                        size: 14,
-                        weight: 'bold'
-                    },
-                    usePointStyle: false,
-                    boxWidth: 40,
-                    boxHeight: 12
-                }
+                display: false // Disable canvas legend to use custom HTML one
             },
             tooltip: {
                 titleFont: {
@@ -235,9 +224,24 @@ const Reports = () => {
                         </div>
                     </Card.Header>
                     <Card.Body>
-                        <div className="chart-container pie-chart">
+                        <div className="chart-container pie-layout-container">
                             {monthlyReport?.expensesByCategory?.length > 0 ? (
-                                <Pie data={pieChartData} options={pieOptions} />
+                                <>
+                                    <div className="pie-chart-wrapper">
+                                        <Pie data={pieChartData} options={pieOptions} />
+                                    </div>
+                                    <div className="custom-legend">
+                                        {monthlyReport.expensesByCategory.map((cat, index) => (
+                                            <div key={cat._id} className="legend-item">
+                                                <div
+                                                    className="legend-color-box"
+                                                    style={{ backgroundColor: pieChartData.datasets[0].backgroundColor[index] }}
+                                                />
+                                                <span className="legend-text">{cat._id}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
                             ) : (
                                 <div className="no-data">No spending data for this period</div>
                             )}
