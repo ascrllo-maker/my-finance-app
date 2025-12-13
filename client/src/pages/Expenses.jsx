@@ -20,6 +20,7 @@ const Expenses = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedMonth, setSelectedMonth] = useState(''); // Empty for all months
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [filterCategory, setFilterCategory] = useState('');
 
     // Form state
     const [formData, setFormData] = useState({
