@@ -68,8 +68,7 @@ const Reports = () => {
                 '#EC4899', '#3B82F6', '#14B8A6', '#F97316', '#6366F1'
             ],
             borderWidth: 0,
-            hoverOffset: 30,
-            radius: '90%'
+            hoverOffset: 20
         }]
     };
 
@@ -117,25 +116,20 @@ const Reports = () => {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: {
-                left: 20,
-                right: 50, // Extra space for legend text
-                top: 20,
-                bottom: 20
-            }
+            padding: 30
         },
         plugins: {
             legend: {
                 position: 'right',
                 labels: {
-                    padding: 30, // Spacing between items
+                    padding: 24,
                     font: {
-                        size: 16, // Larger text
+                        size: 14,
                         weight: 'bold'
                     },
                     usePointStyle: true,
                     pointStyle: 'circle',
-                    boxWidth: 20
+                    boxWidth: 16
                 }
             },
             tooltip: {
