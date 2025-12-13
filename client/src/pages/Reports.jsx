@@ -67,7 +67,8 @@ const Reports = () => {
                 '#4F46E5', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',
                 '#EC4899', '#3B82F6', '#14B8A6', '#F97316', '#6366F1'
             ],
-            borderWidth: 0
+            borderWidth: 0,
+            hoverOffset: 20
         }]
     };
 

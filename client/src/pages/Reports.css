@@ -115,6 +115,10 @@
     justify-content: center;
 }
 
+.chart-container.pie-chart {
+    height: 400px;
+}
+
 .chart-card.full-width {
     grid-column: 1 / -1;
 }
